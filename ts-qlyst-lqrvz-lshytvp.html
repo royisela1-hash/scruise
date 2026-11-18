@@ -1,0 +1,1114 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>צ׳קליסט לקרוז לשיתוף</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #e9f6fb;
+        --surface: #ffffff;
+        --surface-alt: #dcf0f8;
+        --text: #0b3550;
+        --dim: #5d7f92;
+        --border: #c8e4f0;
+        --accent: #0b6fae;
+        --accent-2: #0ea5b7;
+        --warn: #e8710a;
+        --ok: #1d9e57;
+        --radius: 18px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #062539;
+          --surface: #0c3852;
+          --surface-alt: #11486b;
+          --text: #eaf6fb;
+          --dim: #9cc3d6;
+          --border: #1c587e;
+          --accent: #6fd3e7;
+          --accent-2: #45c8d8;
+          --warn: #ff9a3d;
+          --ok: #5fce96;
+        }
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Heebo", "Segoe UI", system-ui, -apple-system, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        -webkit-font-smoothing: antialiased;
+      }
+      button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2rem; }
+
+      main {
+        max-width: 48rem;
+        margin: 0 auto;
+        padding: 1rem 1rem 2.5rem;
+      }
+
+      /* ---------- hero ---------- */
+      .hero {
+        position: relative;
+        overflow: hidden;
+        border-radius: 26px;
+        color: #fff;
+        margin-bottom: 1.25rem;
+        background: linear-gradient(150deg, #63c7ee 0%, #1d9fd8 42%, #0db5a6 100%);
+        box-shadow: 0 10px 30px rgb(11 111 174 / 0.25);
+      }
+      @media (prefers-color-scheme: dark) {
+        .hero { background: linear-gradient(150deg, #0b4a73 0%, #0a6d8c 48%, #0a7d74 100%); }
+      }
+      .hero .deco { position: absolute; pointer-events: none; }
+      .hero .sun { top: -8px; left: 12px; width: 64px; height: 64px; color: #ffe27a; opacity: .9; }
+      .hero .ring { top: 16px; right: 16px; width: 36px; height: 36px; color: rgb(255 255 255 / .4); }
+      .hero .palm { bottom: 32px; right: 8px; width: 80px; height: 80px; color: rgb(255 255 255 / .25); }
+      .hero .ship { bottom: 36px; left: 16px; width: 56px; height: 56px; color: rgb(255 255 255 / .3); }
+      .hero-inner { position: relative; padding: 2rem 1.25rem 4rem; text-align: center; }
+      .hero h1 {
+        margin: 0;
+        font-size: 2rem;
+        font-weight: 800;
+        line-height: 1.25;
+        text-shadow: 0 1px 3px rgb(0 40 70 / .25);
+      }
+      @media (min-width: 640px) { .hero h1 { font-size: 2.5rem; } }
+      .hero .wave-strip { margin: 0.75rem auto 0; width: 160px; height: 16px; color: rgb(255 255 255 / .75); display: block; }
+      .hero .bottom-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 40px; }
+      /* ---------- shopping tab ---------- */
+      .shop-panel { margin-top: 0.75rem; }
+      .shop-title { margin: 0; font-size: 1.125rem; font-weight: 800; }
+      .shop-intro { margin: 0.5rem 0 0; font-size: 1rem; line-height: 1.65; }
+      .shop-soon { margin-top: 1rem; padding: 1.25rem; text-align: center; }
+      .shop-soon h3 { margin: 0; font-size: 1.0625rem; font-weight: 800; color: var(--accent); }
+      .shop-soon p { margin: 0.5rem 0 0; font-size: 0.9375rem; line-height: 1.6; color: var(--dim); }
+      .shop-list { list-style: none; margin: 1rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+      .shop-item { padding: 1rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; }
+      .shop-item-info { flex: 1; min-width: 12rem; }
+      .shop-item-name { margin: 0; font-size: 1rem; font-weight: 700; line-height: 1.5; }
+      .shop-item-name-en { margin: 0.15rem 0 0; font-size: 0.9375rem; line-height: 1.5; color: var(--dim); direction: ltr; text-align: right; }
+      .shop-buy {
+        flex: none; text-decoration: none; min-height: 44px;
+        display: inline-flex; align-items: center; justify-content: center;
+        background: linear-gradient(135deg, #1d9fd8, #0b6fae); color: #fff;
+        border-radius: 999px; padding: 0.6rem 1.3rem;
+        font-size: 0.9375rem; font-weight: 700;
+        box-shadow: 0 4px 12px rgb(11 111 174 / 0.30);
+      }
+      .shop-buy:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      .shop-note { margin: 1rem 0 0; font-size: 0.9375rem; line-height: 1.6; color: var(--dim); }
+
+      /* ---------- cards & progress ---------- */
+      .card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        box-shadow: 0 3px 14px rgb(11 90 140 / 0.08);
+      }
+      .progress-card { padding: 1rem; }
+      .progress-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
+      .progress-label { margin: 0; font-size: 0.875rem; font-weight: 600; color: var(--dim); }
+      .progress-num { margin: 0.25rem 0 0; font-size: 1.875rem; font-weight: 800; line-height: 1; color: var(--accent); }
+      .progress-num .of { font-size: 1.125rem; font-weight: 600; color: var(--dim); }
+      .progress-icon {
+        flex: none; width: 48px; height: 48px; display: grid; place-items: center;
+        border-radius: 999px; background: var(--surface-alt); color: var(--accent);
+      }
+      .progress-icon svg { width: 24px; height: 24px; }
+      .progress-track { margin-top: 0.75rem; height: 14px; border-radius: 999px; background: var(--surface-alt); overflow: hidden; }
+      .progress-fill {
+        height: 100%; border-radius: 999px; width: 0;
+        background: linear-gradient(90deg, #0db5a6, #0b6fae);
+        transition: width .5s ease;
+      }
+      .progress-bottom { margin-top: 0.75rem; display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+      .progress-pct { font-size: 0.875rem; font-weight: 700; color: var(--accent); }
+      .reset-btn {
+        border: 1px solid var(--border); background: transparent; color: var(--accent);
+        border-radius: 999px; padding: 0.4rem 0.85rem; font: inherit; font-size: 0.875rem;
+        font-weight: 600; cursor: pointer;
+      }
+      .reset-btn:disabled { opacity: .4; cursor: default; }
+
+      /* ---------- tabs ---------- */
+      .tabs { margin-top: 1rem; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+      @media (min-width: 640px) { .tabs { grid-template-columns: repeat(3, 1fr); } }
+      .tab-btn {
+        border: 1px solid var(--border); background: var(--surface); color: var(--text);
+        border-radius: var(--radius); padding: 0.75rem; text-align: right;
+        box-shadow: 0 3px 14px rgb(11 90 140 / 0.08);
+        font: inherit; cursor: pointer; min-height: 44px;
+      }
+      .tab-btn .tab-head { display: flex; align-items: center; gap: 0.5rem; }
+      .tab-btn .tab-head svg { width: 20px; height: 20px; flex: none; }
+      .tab-btn .tab-title { font-size: 0.875rem; font-weight: 700; line-height: 1.35; }
+      .tab-btn .tab-count { display: block; margin-top: 0.25rem; font-size: 0.75rem; font-weight: 600; color: var(--dim); }
+      .tab-btn.active {
+        background: linear-gradient(135deg, #1d9fd8, #0b6fae);
+        border-color: transparent; color: #fff;
+        box-shadow: 0 4px 12px rgb(11 111 174 / 0.30);
+      }
+      .tab-btn.active .tab-count { color: rgb(255 255 255 / .8); }
+
+      /* ---------- active section ---------- */
+      .section-head { margin-top: 1.25rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.75rem; }
+      .section-icon {
+        width: 40px; height: 40px; flex: none; display: grid; place-items: center;
+        border-radius: 999px; background: var(--surface-alt); color: var(--accent);
+      }
+      .section-icon svg { width: 20px; height: 20px; }
+      .section-head h2 { margin: 0; font-size: 1.25rem; font-weight: 800; }
+      .section-count { font-size: 0.875rem; font-weight: 600; color: var(--accent-2); }
+
+      .guide-list { list-style: none; margin: 0.75rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.75rem; }
+      .guide-list > li { position: relative; }
+      .guide-list > li:nth-of-type(5n):not(:last-child)::after {
+        content: "";
+        position: absolute; bottom: -13px; left: 50%; transform: translateX(-50%);
+        width: 120px; height: 12px; pointer-events: none; opacity: .55;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath d='M0 7 Q 7.5 1 15 7 T 30 7 T 45 7 T 60 7 T 75 7 T 90 7 T 105 7 T 120 7' fill='none' stroke='%233fb3c2' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
+        background-repeat: no-repeat; background-position: center;
+      }
+
+      .item { padding: 1rem; }
+      .item-row { display: flex; align-items: flex-start; gap: 0.75rem; }
+      .item-check { display: flex; min-width: 44px; min-height: 44px; align-items: center; justify-content: center; cursor: pointer; margin: -0.35rem -0.35rem -0.35rem 0; }
+      .item-text { margin: 0; font-size: 1rem; line-height: 1.65; flex: 1; min-width: 0; }
+      .item.done .item-text { color: var(--dim); text-decoration: line-through; text-decoration-thickness: 2px; }
+      .item .green-check { font-weight: 800; color: var(--ok); }
+
+      .highlighted-item {
+        border: 2px solid var(--accent);
+        background: #fff6cf;
+        box-shadow: 0 4px 14px rgb(11 111 174 / 0.22);
+      }
+      @media (prefers-color-scheme: dark) {
+        .highlighted-item { background: #4a3d10; box-shadow: 0 4px 14px rgb(0 0 0 / 0.45); }
+      }
+      .highlighted-item .item-text { font-size: 1.125rem; font-weight: 800; }
+      .highlight-badge {
+        display: inline-flex; align-items: center; border-radius: 999px;
+        background: var(--warn); color: #fff; padding: 0.15rem 0.6rem;
+        font-size: 0.75rem; font-weight: 700; margin-bottom: 0.35rem;
+      }
+
+      .sea-checkbox {
+        appearance: none; -webkit-appearance: none; flex: none;
+        width: 28px; height: 28px; border-radius: 9px;
+        border: 2.5px solid var(--accent-2); background: var(--surface);
+        cursor: pointer; transition: background-color .15s ease, border-color .15s ease;
+      }
+      .sea-checkbox:checked {
+        background-color: var(--ok); border-color: var(--ok);
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E");
+        background-repeat: no-repeat; background-position: center; background-size: 17px;
+      }
+      .sea-checkbox:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+      /* ---------- decorative divider & footer ---------- */
+      .wave-divider { margin-top: 2.5rem; display: flex; align-items: center; gap: 0.75rem; color: var(--accent-2); }
+      .wave-divider .rule { height: 1px; flex: 1; background: var(--border); }
+      .wave-divider svg { width: 20px; height: 20px; opacity: .7; }
+      .wave-divider .strip { width: 96px; height: 12px; opacity: .6; }
+      footer.motifs { margin-top: 3rem; display: flex; flex-direction: column; align-items: center; gap: 0.75rem; color: var(--accent-2); }
+      footer.motifs .row { display: flex; align-items: flex-end; gap: 1.25rem; opacity: .7; }
+      footer.motifs .strip { width: 144px; height: 12px; opacity: .6; }
+
+      /* ---------- suggestions line ---------- */
+      .feedback { margin-top: 3rem; padding: 1.25rem; text-align: center; }
+      .feedback .feedback-line { margin: 0; font-size: 1rem; font-weight: 700; line-height: 1.9; }
+      .feedback-line a { color: var(--accent); font-weight: 700; }
+      .feedback-copy {
+        border: 1px solid var(--border); background: var(--surface); color: var(--accent);
+        border-radius: 999px; padding: 0.3rem 0.85rem; font: inherit;
+        font-size: 0.875rem; font-weight: 700; cursor: pointer;
+        margin-inline-start: 0.5rem; vertical-align: middle;
+      }
+      .feedback-copy:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      .feedback .feedback-status { margin: 0.5rem 0 0; font-size: 0.9375rem; font-weight: 600; color: var(--ok); line-height: 1.6; }
+
+      /* ---------- legal ---------- */
+      .legal { margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 1rem; color: var(--dim); }
+      .legal h2 { margin: 0; font-size: 0.75rem; font-weight: 700; }
+      .legal p { margin: 0.25rem 0 0; font-size: 0.75rem; line-height: 1.7; }
+
+      /* ---------- packing tab ---------- */
+      .pack-actions {
+        margin-top: 0.75rem; padding: 1rem;
+        display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem;
+      }
+      .pack-actions-bottom { justify-content: center; }
+      .pack-actions-hint {
+        margin: 0; flex: 1; min-width: 14rem;
+        font-size: 0.9375rem; line-height: 1.6; font-weight: 600; color: var(--dim);
+      }
+      .pack-print-btn {
+        border: none; cursor: pointer; min-height: 48px; flex: none;
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: linear-gradient(135deg, #1d9fd8, #0b6fae); color: #fff;
+        border-radius: 999px; padding: 0.7rem 1.4rem;
+        font: inherit; font-size: 1rem; font-weight: 700;
+        box-shadow: 0 4px 12px rgb(11 111 174 / 0.30);
+      }
+      .pack-print-btn svg { width: 18px; height: 18px; }
+      .pack-print-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      .pack-group-title {
+        margin: 1.5rem 0 0; font-size: 1.0625rem; font-weight: 800; color: var(--accent);
+        display: flex; align-items: center; gap: 0.5rem;
+      }
+      .pack-group-title::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+      .pack-note {
+        margin: 0.75rem 0 0; padding: 0.85rem 1rem;
+        background: var(--surface-alt); border-radius: 12px;
+        font-size: 0.9375rem; line-height: 1.65; font-weight: 600;
+      }
+      .pack-custom-input {
+        flex: 1; min-width: 0; font: inherit; font-size: 1rem; line-height: 1.5;
+        color: var(--text); background: var(--surface);
+        border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 0.75rem;
+      }
+      .pack-custom-input::placeholder { color: var(--dim); }
+      .pack-custom-input:focus { outline: 3px solid var(--accent); outline-offset: 1px; }
+      .item.done .pack-custom-input { color: var(--dim); text-decoration: line-through; }
+      .pack-add-row { margin-top: 0.75rem; }
+      .pack-add-btn {
+        border: 1px solid var(--border); background: var(--surface); color: var(--accent);
+        border-radius: 999px; padding: 0.5rem 1.1rem; font: inherit; font-size: 0.9375rem;
+        font-weight: 700; cursor: pointer; min-height: 44px;
+      }
+      .pack-add-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+      /* ---------- packing print sheet ---------- */
+      .pack-print-area { display: none; }
+      .pack-print-bar { display: none; }
+      body.packing-print-view .pack-print-bar {
+        display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 1rem;
+        margin-bottom: 1rem; padding: 0.85rem 1rem;
+        background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+        font-size: 0.9375rem; font-weight: 600; line-height: 1.6;
+      }
+      .pack-back-btn {
+        border: 1px solid var(--border); cursor: pointer; min-height: 44px; flex: none;
+        background: var(--surface); color: var(--accent);
+        border-radius: 999px; padding: 0.55rem 1.2rem;
+        font: inherit; font-size: 0.9375rem; font-weight: 700;
+      }
+      .pack-back-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      .pack-print-do-btn {
+        border: none; cursor: pointer; min-height: 48px; flex: none;
+        display: inline-flex; align-items: center; gap: 0.5rem;
+        background: linear-gradient(135deg, #1d9fd8, #0b6fae); color: #fff;
+        border-radius: 999px; padding: 0.65rem 1.4rem;
+        font: inherit; font-size: 1rem; font-weight: 700;
+        box-shadow: 0 4px 12px rgb(11 111 174 / 0.30);
+      }
+      .pack-print-do-btn svg { width: 18px; height: 18px; }
+      .pack-print-do-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+      body.packing-print-view .pack-print-bar span { flex: 1; min-width: 12rem; }
+      body.packing-print-view main > *:not(.pack-print-area):not(.pack-print-bar) { display: none !important; }
+      body.packing-print-view .pack-print-area {
+        display: block; background: #fff; color: #000;
+        border-radius: 12px; padding: 1.25rem;
+        box-shadow: 0 3px 14px rgb(11 90 140 / 0.12);
+      }
+      body.packing-print-view .pack-print-area h1,
+      .pack-print-area h1 { margin: 0 0 0.25rem; font-size: 1.5rem; font-weight: 800; }
+      body.packing-print-view .pack-print-area h2,
+      .pack-print-area h2 { margin: 1.1rem 0 0.3rem; font-size: 1.05rem; font-weight: 800; border-bottom: 2px solid #0b6fae; padding-bottom: 0.2rem; }
+      body.packing-print-view .pack-print-area ul,
+      .pack-print-area ul { list-style: none; margin: 0; padding: 0; }
+      body.packing-print-view .pack-print-area li,
+      .pack-print-area li { font-size: 1rem; line-height: 1.6; padding: 0.15rem 0; }
+      body.packing-print-view .pack-print-area .box,
+      .pack-print-area .box { display: inline-block; width: 1.1rem; text-align: center; }
+      body.packing-print-view .pack-print-area .pack-print-note,
+      .pack-print-area .pack-print-note { margin: 0.5rem 0 0; font-size: 0.95rem; font-weight: 600; background: #eef6fa; color: #000; padding: 0.5rem 0.7rem; border-radius: 8px; }
+      @media print {
+        @page { margin: 14mm; }
+        body { background: #fff !important; color: #000 !important; }
+        main { max-width: none; margin: 0; padding: 0; }
+        main > *:not(.pack-print-area) { display: none !important; }
+        .pack-print-area { display: block !important; font-family: "Heebo", "Segoe UI", sans-serif; }
+        .pack-print-area h1 { margin: 0 0 0.25rem; font-size: 20pt; font-weight: 800; }
+        .pack-print-area h2 { margin: 14pt 0 4pt; font-size: 13pt; font-weight: 800; border-bottom: 1.5pt solid #0b6fae; padding-bottom: 2pt; }
+        .pack-print-area ul { list-style: none; margin: 0; padding: 0; }
+        .pack-print-area li { font-size: 11pt; line-height: 1.55; padding: 1.5pt 0; break-inside: avoid; }
+        .pack-print-area .box { display: inline-block; width: 11pt; text-align: center; }
+        .pack-print-area .pack-print-note { margin: 6pt 0 0; font-size: 10.5pt; font-weight: 600; background: #eef6fa; padding: 6pt 8pt; border-radius: 6pt; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .progress-fill { transition: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <svg class="deco sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+        <svg class="deco ring" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><path d="m5.6 5.6 3.9 3.9"/><path d="m14.5 14.5 3.9 3.9"/><path d="m18.4 5.6-3.9 3.9"/><path d="m9.5 14.5-3.9 3.9"/></svg>
+        <svg class="deco palm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.5 21.5c-.8-4.5-.3-8.5 1.8-12"/><path d="M14.3 9.5C12.2 6.6 8.9 5.6 5.6 6.7"/><path d="M14.3 9.5C11.2 8.2 7.9 8.7 5.2 10.8"/><path d="M14.3 9.5c.1-3 1.7-5.3 4.6-6.4"/><path d="M14.3 9.5c2.7-1.6 5.8-1.4 8.1.6"/><circle cx="13" cy="10.6" r="0.9"/><circle cx="15.4" cy="10.8" r="0.9"/></svg>
+        <svg class="deco ship" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 16.5h19l-2.3 4a1 1 0 0 1-.87.5H5.67a1 1 0 0 1-.87-.5l-2.3-4Z"/><path d="M6.5 16.5v-3.5h11v3.5"/><path d="M9.5 13V9.5h5V13"/><path d="M11 9.5v-3h2v3"/></svg>
+        <div class="hero-inner">
+          <h1>צ׳קליסט לקרוז</h1>
+          <svg class="wave-strip" viewBox="0 0 120 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" preserveAspectRatio="none" aria-hidden="true"><path d="M0 7 Q 7.5 1 15 7 T 30 7 T 45 7 T 60 7 T 75 7 T 90 7 T 105 7 T 120 7"/></svg>
+        </div>
+        <svg class="bottom-wave" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 42 C 240 78, 480 6, 720 34 C 960 62, 1200 12, 1440 42 L1440 70 L0 70 Z" fill="var(--bg)"/></svg>
+      </header>
+
+      <section class="card progress-card" aria-label="התקדמות">
+        <div class="progress-top">
+          <div>
+            <p class="progress-label">התקדמות ההכנות לקרוז</p>
+            <p class="progress-num"><span id="doneTotal">0</span><span class="of"> מתוך <span id="totalItems">47</span> סעיפים</span></p>
+          </div>
+          <span class="progress-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16.5h19l-2.3 4a1 1 0 0 1-.87.5H5.67a1 1 0 0 1-.87-.5l-2.3-4Z"/><path d="M6.5 16.5v-3.5h11v3.5"/><path d="M9.5 13V9.5h5V13"/><path d="M11 9.5v-3h2v3"/></svg>
+          </span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="התקדמות כללית" aria-valuemin="0" aria-valuemax="47" aria-valuenow="0" id="progressBar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="progress-bottom">
+          <span class="progress-pct" id="progressPct">0% הושלמו</span>
+          <button type="button" class="reset-btn" id="resetBtn" disabled>איפוס הסימונים</button>
+        </div>
+      </section>
+
+      <nav class="tabs" id="tabs" aria-label="לשוניות המדריך"></nav>
+
+      <section id="activeSection" aria-live="polite"></section>
+
+      <div class="pack-print-bar" id="packPrintBar">
+        <button type="button" class="pack-print-do-btn" id="packPrintDo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>
+          הדפסה / שמירה כ־PDF
+        </button>
+        <button type="button" class="pack-back-btn" id="packPrintBack">חזרה לרשימה</button>
+        <span>זהו גיליון ההדפסה של רשימת האריזה בלבד. לחצו על כפתור ההדפסה, ובחלון שייפתח בחרו מדפסת — או שמירה כ־PDF כדי לשמור קובץ.</span>
+      </div>
+
+      <div class="pack-print-area" id="packPrintArea" aria-hidden="true"></div>
+
+      <div class="wave-divider" aria-hidden="true">
+        <span class="rule"></span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M12 22V8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+        <svg class="strip" viewBox="0 0 120 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" preserveAspectRatio="none"><path d="M0 7 Q 7.5 1 15 7 T 30 7 T 45 7 T 60 7 T 75 7 T 90 7 T 105 7 T 120 7"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 7c2 0 2 1.8 4 1.8S8 7 10 7s2 1.8 4 1.8S16 7 18 7s2 1.8 4 1.8"/><path d="M2 15c2 0 2 1.8 4 1.8S8 15 10 15s2 1.8 4 1.8 2-1.8 4-1.8 2 1.8 4 1.8"/></svg>
+        <span class="rule"></span>
+      </div>
+
+      <footer class="motifs" aria-hidden="true">
+        <div class="row">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.5 21.5c-.8-4.5-.3-8.5 1.8-12"/><path d="M14.3 9.5C12.2 6.6 8.9 5.6 5.6 6.7"/><path d="M14.3 9.5C11.2 8.2 7.9 8.7 5.2 10.8"/><path d="M14.3 9.5c.1-3 1.7-5.3 4.6-6.4"/><path d="M14.3 9.5c2.7-1.6 5.8-1.4 8.1.6"/><circle cx="13" cy="10.6" r="0.9"/><circle cx="15.4" cy="10.8" r="0.9"/></svg>
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 16.5h19l-2.3 4a1 1 0 0 1-.87.5H5.67a1 1 0 0 1-.87-.5l-2.3-4Z"/><path d="M6.5 16.5v-3.5h11v3.5"/><path d="M9.5 13V9.5h5V13"/><path d="M11 9.5v-3h2v3"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="10" width="8" height="6" rx="3"/><rect x="13.5" y="10" width="8" height="6" rx="3"/><path d="M10.5 11.5c1-1 2-1 3 0"/><path d="M2.5 11.5 1.2 7"/><path d="M21.5 11.5 22.8 7"/></svg>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><path d="M12 22V8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+        </div>
+        <svg class="strip" viewBox="0 0 120 12" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" preserveAspectRatio="none"><path d="M0 7 Q 7.5 1 15 7 T 30 7 T 45 7 T 60 7 T 75 7 T 90 7 T 105 7 T 120 7"/></svg>
+      </footer>
+
+      <section class="card feedback" aria-label="להצעות נוספות">
+        <p class="feedback-line">להצעות נוספות — שלחו מייל ל־<a href="mailto:selahr2012@gmail.com">selahr2012@gmail.com</a>
+          <button type="button" class="feedback-copy" id="feedbackCopyEmail">העתקת הכתובת</button>
+        </p>
+        <p class="feedback-status" id="feedbackCopyStatus" hidden></p>
+      </section>
+
+      <section class="legal" aria-label="הבהרה משפטית">
+        <h2>הבהרה משפטית</h2>
+        <p>התכנים במסמך זה הם המלצות בלבד, המבוססות על ניסיון אישי, ואינם מהווים ייעוץ מקצועי מכל סוג שהוא. רועי סלע אינו נושא בכל אחריות משפטית, ישירה או עקיפה, לתוצאות הנובעות מהשימוש בתכנים אלו. כל שימוש בתכנים הוא על אחריות המשתמש בלבד.</p>
+      </section>
+    </main>
+
+    <script>
+      var ICONS = {
+        suitcase: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="16" height="13" rx="2.5"/><path d="M9 7V5a3 3 0 0 1 6 0v2"/><path d="M10 11.5v4"/><path d="M14 11.5v4"/></svg>',
+        calendar: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9.5h18"/><path d="M8 2.5v4"/><path d="M16 2.5v4"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/><path d="M8 17.5h.01"/><path d="M12 17.5h.01"/></svg>',
+        ship: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 16.5h19l-2.3 4a1 1 0 0 1-.87.5H5.67a1 1 0 0 1-.87-.5l-2.3-4Z"/><path d="M6.5 16.5v-3.5h11v3.5"/><path d="M9.5 13V9.5h5V13"/><path d="M11 9.5v-3h2v3"/></svg>',
+        clock: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>',
+        star: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5l3.09 6.26 6.91 1-5 4.87 1.18 6.88L12 18.27l-6.18 3.24L7 14.63 2 9.76l6.91-1L12 2.5z"/></svg>',
+        bag: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h15l-1.5 9a2 2 0 0 1-2 1.7h-9A2 2 0 0 1 6.5 16L5 7"/><path d="M6 7 5.2 3.5A1 1 0 0 0 4.2 2.8H2.5"/><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>',
+        packing: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 11 3 3 8.5-8.5"/><path d="M21 12.5v6A2.5 2.5 0 0 1 18.5 21h-13A2.5 2.5 0 0 1 3 18.5v-13A2.5 2.5 0 0 1 5.5 3h11"/></svg>',
+        printer: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8" rx="1"/></svg>'
+      };
+
+      var TABS = [
+        {
+          title: "טרם ההפלגה",
+          icon: "suitcase",
+          items: [
+            { text: "להוריד את האפליקציה של חברת הקרוז - הכל מבוצע באפליקציה", highlighted: true },
+            "ללמוד מראש על הנמלים שהספינה נכנסת אליהם בהפלגה כדי לתכנן מה ניתן לעשות באותו מיקום, לפעמים עדיף להישאר בספינה בזמן שהיא עוגנת — יש פחות תורים למגלשות, לבריכות ולפעילויות, בנוסף להנחות בספא וכו'.",
+            "חבילת אינטרנט: מומלץ לעשות אדם אחד עם מספר מכשירים (עד 4 מכשירים) על מנת להוזיל את המחיר. לעקוב אחרי המחירים המחיר הזול ביותר 21.99$ (לא תמיד מופיע רק במבצעים)",
+            "חבילת שתייה להזמין בהתאם למה שהמשפחה שותה. המלצה על חבילת REFRESHMENT שכוללת את כל השתייה (פרט לאלכוהול) ומכילה קפה (אספרסו, קפוצ׳ינו ועוד), בקבוקי מים סגורים, פחיות שתייה קלה, מילקשייק, מיץ תפוזים סחוט, מוקטייל וכו'... המחיר הזול ביותר לחבילה זו הינו $24.99. * במידה ובחדר רשומים נערים (Teens) ניתן לרשום עליהם והמחיר זול יותר ממחיר מבוגר.",
+            "לבצע צ'ק-אין לכל המשפחה - תאריך פתיחת הצ'ק-אין מופיע באפליקציה. *התמונה שמצלמים מופיעה לביטחון לטובת לזיהוי כשיורדים מהספינה ובכל פעם שמעבירים את הכרטיס - אז להרגיע את האישה שלא צריך להתאפר וכו'..",
+            "להזמין (אם ניתן) מקומות להופעות: מופע החלקה על הקרח; AQUATHEATER, מופע בסגנון BROADWAY. לא חובה אבל נותן עדיפות בכניסה כ- 15 דקות לפני המופע, במידה ואין מקום או לא הוזמן עדיין ניתן להיכנס למופעים פשוט להמתין בסמוך למופע.",
+            "לקנות כדורים / מדבקות למחלת ים בסופר פארם / CVS (ניתן לבקש בשירות לקוחות בספינה).",
+            "לוודא ביטוח רפואי - חשוב.",
+            "הזמנת חנייה לרכב מראש בסמוך לנמל ותיאום הזמנת אובר מראש מהחנייה, במידה ויוצאים מהמלון הזמנת אובר מראש מהמלון לספינה (יותר זול להזמין מראש)"
+          ]
+        },
+        {
+          title: "יום לפני ההפלגה",
+          icon: "calendar",
+          items: [
+            "למלא שאלון בריאות - השלמה של הצ'ק-אין.",
+            "לראות את סרטון הבטיחות יחד, הוא יפתח בבוקר של יום ההפלגה.",
+            "לוודא שהזמנת את חבילת האינטרנט ו/או חבילת שתייה (במידה ומעוניינים) כמה שיותר מוקדם כ 24 שעות לפני ההפלגה לא ניתן להזמין - ביום ההפלגה ובהפלגה עצמה זה הרבה יותר יקר!",
+            "להכין מזוודה טרולי / תיק גב עם ציוד בסיסי לכניסה לספינה (עד שמקבלים את המזוודה לחדר) שכולל: בגד-ים, בגדים להחלפה, קרם הגנה, ארנקים, דרכונים, כפכפים.",
+            "להביא כסף מזומן: לטיפים לבחור שמעמיס את המזוודות (2-5 דולר), לקזינו (חוסך עמלה של 5% בתשלום בכרטיס של הספינה), טיפים למלצרים / חדרן ולשימוש בירידה בנמלים השונים (לא חובה אבל מסייע)."
+          ]
+        },
+        {
+          title: "יום ההפלגה",
+          icon: "ship",
+          items: [
+            "לוודא סיום הצ'ק־אין - שלכולם יהיה ✓ ירוק.",
+            "לוודא שראיתם סרטון בטיחות (לא חובה) יחסוך זמן בספינה.",
+            "לתכנן הגעה לספינה מוקדם (מומלץ 11:00–11:30).",
+            "לוודא דרכונים של כולם נשארים איתכם בעלייה לספינה.",
+            "לוודא מזוודת טרולי / תיק גב שהכנתם מראש נשאר איתכם.",
+            "להכין 2–5 דולר טיפ לסבל שלוקח את המזוודות הגדולות ( יחסוך אי נעימות כי הוא יבקש טיפ).",
+            "נחמד להצטלם עם הכניסה לספינה על ידי הצוות המקצועי, התמונה יקרה אבל באיכות גבוהה ויכולה להיות אחלה מזכרת - אז מומלץ להצטלם זה לא מחייב לקנות.",
+            "ללכת ל־Guest Services במידה ורוצים לבטל טיפים לחדר - הנושא מעורר שיח רב ברשת, האם זה נכון או לא (ההחלטה שלכם).",
+            "ללכת כולם לנקודת רפסודת ההצלה על מנת שיסמנו שהגעתם - יחסוך קריאה של השם שלכם בכריזה ועיכובים. מספר הרפסודה מופיע באפליקציה.",
+            "ללכת לחדר אוכל בקומה 3 או 4 ולהרשם לשעה שנוחה לכם לאכול — שעה שמתאימה לכולם והיא לכל אורך ההפלגה. גם אם נרשמתם לא חובה לאכול בחדר אוכל.",
+            "ללכת לאכול פיצה כדי להירגע ולהיכנס למוד הפלגה ☺ .",
+            "להנות.",
+            "ניתן ללכת לחדר לראות אם הוא מוכן במידה ויהיה שם מעטפה עם כרטיסים על המספר חדר אז הוא מוכן - מזוודות עד הערב יגיעו. הכרטיסים משמשים כארנק, ת.ז., שימוש בחבילות שתייה ועוד."
+          ]
+        },
+        {
+          title: "יום לפני סיום הפלגה",
+          icon: "clock",
+          items: [
+            "סגירת חשבון ותשלום חובות באפליקציה או בשירות לקוחות.",
+            "לתאם אובר/שאטל מהספינה לחנייה או למלון מראש על מנת לחסוך עומס גבוה על האפשרות לזימון אובר ומחיר גבוה במיוחד.",
+            "הכנה של מזוודה שנשארת איתך עם דרכונים, ארנק, כלי רחצה ובגדים לירידה מהספינה.",
+            "אריזת המזוודות והוצאתם מחוץ לחדר עד 21:00 בלילה האחרון להפלגה."
+          ]
+        },
+        {
+          title: "טיפים כלליים",
+          icon: "star",
+          items: [
+            { text: "הכי חשוב !!! להגיע אל הספינה חזרה לפחות שעה וחצי לפני יציאה לים. הספינה תצא בלעדיכם היא לא מחכה לאף אחד.", highlighted: true },
+            "במהלך היום המזוודות יגיעו לאזור החדר. ניתן לאכסן אותם מתחת למיטה על מנת שלא יתפסו מקום.",
+            "קפה (אספרסו, קפוצ׳ינו ועוד) שכלול בחבילת שתייה Refreshment , נמצא במרכז הספינה קומות 5-6 תלוי בספינה, קפה נוסף נמצא בכניסה לספא (לרוב פחות עמוס). * קפה סטארבקס הינו מותג פרטי בתשלום!",
+            "פיצה נמצאת בקומה 5 מרכז ספינה — פתוח מ 11:00 ועד השעות הקטנות של הלילה.",
+            "אם רוצים לשחק בקזינו מומלץ להביא מזומנים מהבית, ניתן גם לקחת כסף עם הכרטיס של הספינה (מהאשראי ששמתם לפיקדון) אך הדבר כרוך ב 5% עמלה.",
+            "בירידה לחופים השונים מומלץ להשתמש במזומן במידה ורוצים לשלם למונית או לאטרקציה בחוץ ולא דרך הספינה. בחנויות ברציף ביציאה מהספינה (מלכודת תיירים) ניתן לשלם גם בכרטיס אשראי.",
+            "אם מעוניינים לצלול, מומלץ להביא שנורקל ומשקפת איתכם במידה ואפשר (מקום ומשקל במזוודה) יחסוך כסף.",
+            "ניתן לשים את הילדים מעל גיל 3 במועדוני ילדים של הספינה בחינם.",
+            "מומלץ (לא חובה) לקנות חבל גומי לתלייה של בגדי ים לייבוש במרפסת או במקלחת. במידה ורוצים מומלץ לקנות וו תליה עם מגנט לתלייה בחדר של דברים נוספים (הקירות ממתכת).",
+            "מומלץ ללכת להופעות בספינה - אם ניתן להזמין מראש (טרם ההפלגה) ברויאל קריביאן: הופעה של החלקה על הקרח, Aquatheater , הופעה באולם הראשי.",
+            "מומלץ לבדוק מידי יום ״בחשבון שלי״ באפליקציה שאין חיובים לא מוכרים/ מאושרים (שתייה, טיפים ועוד).",
+            "בסיום ההפלגה בירידה מהספינה יהיו הרבה מאד אנשים שהזמינו אובר ויקח הרבה מאד זמן להזמין אובר מעכשיו לעכשיו - מומלץ להזמין אובר מראש (מספר ימים לפני) יחסוך זמן וכסף.",
+            "ההופעות הכי מבוקשות הינם בימים שבהם הספינה בים ולא עוגנת בחוף - מומלץ להזמין מראש הופעות בימים אלו.",
+            "מותר להביא 2 בקבוקי יין או שמפניה 750 מ״ל לכל חדר, לא מאושר להביא כל אלכוהול אחר.",
+            "מומלץ לבדוק באפליקציה מה קוד הלבוש בימים השונים בהפלגה (לבן, קאריבי, התלבש במיטבך...) זה לא חובה אבל מכניס לאווירה ופחות כיף ללבוש צבעוני כשכל הספינה בלבן.",
+            "מצאתם ברווז גומי בספינה? - תרבות הברווזים בקרוז (Cruising Ducks) היא משחק \"חפש את המטמון\" עולמי וידידותי למשפחות, שבו נוסעים מחביאים ברווזי גומי ברחבי האונייה כדי לשמח נוסעים אחרים."
+          ]
+        },
+        {
+          title: "רשימת קניות להפלגה",
+          icon: "bag",
+          shopping: true,
+          items: []
+        },
+        {
+          title: "רשימת אריזה",
+          icon: "packing",
+          packing: true,
+          items: []
+        }
+      ];
+
+      /* Packing list content — exactly as in Royi's corrected Word document.
+         Kept in its own groups/storage so the existing 45-item progress above
+         is untouched. */
+      var PACKING_GROUPS = [
+        {
+          title: "לאריזה ולתכנון",
+          items: [
+            "תיק גב לעלייה לספינה",
+            "מזוודה לשליחה בכניסה לספינה",
+            "משקל מזוודות דיגיטלי (בקרוז לא שוקלים מזוודה)",
+            "אפליקציית חברת הקרוז — להוריד מראש",
+            "תג מעקב למזוודה – אפשר להדפיס מה ששולחים ואפשר שמגיעים הסבל ירשום בעצמו",
+            "ביטוח רפואי לקרוז"
+          ]
+        },
+        {
+          title: "לנסיעה וליום העלייה לספינה",
+          items: [
+            "דרכון",
+            "כרטיסי אשראי, מזומן ומטבע מקומי (לא חובה)",
+            "תרופות מרשם",
+            "טלפון ומטען לטלפון",
+            "מצלמה"
+          ]
+        },
+        {
+          title: "לתא",
+          items: [
+            "ווי תלייה מגנטיים",
+            "חומר כביסה – למי שמצומצם בבגדים – ניתן לשלוח בספינה (יקר)",
+            "יין או שמפניה אם רוצים מאושר עד 2 בקבוקים לחדר",
+            "פותחן בקבוקים",
+            "מתאם חשמל בינלאומי או ממיר מתח – יש גם 220 וגם 110 אבל מעט שקעים",
+            "רצועת בנג'י (חבל אלסטי) / מתלה כביסה",
+            "מצופים לילדים – קיים בספינה חגורת הצלה",
+            "חיתולי בריכה (רב פעמי) לילד לא גמול",
+            "ערכת עזרה ראשונה – יש גם בספינה",
+            "חומר חיטוי – לא חובה יש הרבה בספינה",
+            "קישוט לדלת התא – לא חובה חלק מהתרבות האמריקאית",
+            "ברווזים להחבאה – לא חובה חלק מהתרבות האמריקאית"
+          ],
+          note: "הערה: אפשר לבקש מהחדרן בחינם — חלוק, מאוורר, כריות ושמיכות נוספות."
+        },
+        {
+          title: "בגדים",
+          items: [
+            "בגדים יומיומיים",
+            "בגדים לערב אלגנטי",
+            "ז'קט / סוודר",
+            "בגדים למסיבות נושא – בהתאם ללבוש בספינה (לבן, קאריבי)",
+            "גרביים / גרביונים",
+            "פיג'מה",
+            "תחתונים",
+            "מעיל מתקפל",
+            "נעלי הליכה נוחות",
+            "בגדי ים",
+            "בגדי חוף",
+            "נעלי עקב רב־שימושיות או נעליים שטוחות"
+          ]
+        },
+        {
+          title: "טיפוח ורחצה",
+          items: [
+            "שמפו ומרכך בספינה יש סבוניה 3 ב1 (פחות מתאים לנשים)",
+            "דאודורנט",
+            "מוצרי היגיינה נשית",
+            "מברשת ומשחת שיניים",
+            "חוט דנטלי",
+            "מברשת שיער",
+            "קרם גוף",
+            "עדשות מגע / משקפיים",
+            "מוצרי איפור",
+            "מכשירי עיצוב שיער"
+          ]
+        },
+        {
+          title: "לספינה ולסיורי החוף",
+          items: [
+            "שרוך צוואר לכרטיס הספינה",
+            "צמידים נגד בחילה (Sea-Bands) או דרממין — כדורים נגד מחלת ים",
+            "קרם הגנה",
+            "קרם לאחר שיזוף",
+            "כיסוי עמיד במים לטלפון",
+            "כובע לשמש",
+            "ומשקפת שנורקל",
+            "צעצועי חוף",
+            "אטבים למגבת",
+            "משקפי שמש",
+            "בקבוק מים רב־פעמי (נוח)",
+            "תיק גב (מומלץ עמיד במים)",
+            "מצלמת גו-פרו"
+          ]
+        },
+        {
+          title: "דברים נוספים לארוז",
+          custom: true,
+          items: []
+        }
+      ];
+      var FIXED_TOTAL = PACKING_GROUPS.reduce(function (s, g) { return s + g.items.length; }, 0);
+      var CUSTOM_START = FIXED_TOTAL;
+      function packTotal() { return FIXED_TOTAL + customItems.length; }
+      function packFlatIndex(g, i) {
+        var n = 0;
+        for (var k = 0; k < g; k++) n += PACKING_GROUPS[k].items.length;
+        return n + i;
+      }
+
+      var TOTAL = TABS.reduce(function (s, t) { return s + t.items.length; }, 0);
+      var STORAGE_KEY = "cruise-checklist-checked-v1";
+      function loadChecked() {
+        try {
+          var raw = window.localStorage.getItem(STORAGE_KEY);
+          if (!raw) return {};
+          var parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed !== "object") return {};
+          var out = {};
+          for (var k in parsed) if (parsed[k]) out[k] = true;
+          return out;
+        } catch (e) {
+          return {};
+        }
+      }
+      function saveChecked() {
+        try {
+          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(checked));
+        } catch (e) {
+          /* storage unavailable (e.g. private mode): checks stay for this visit only */
+        }
+      }
+      var checked = loadChecked(); /* persisted per visitor in their own browser */
+
+      var PACK_STORAGE_KEY = "cruise-packing-checked-v1";
+      function loadPackChecked() {
+        try {
+          var raw = window.localStorage.getItem(PACK_STORAGE_KEY);
+          if (!raw) return {};
+          var parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed !== "object") return {};
+          var out = {};
+          for (var k in parsed) if (parsed[k]) out[k] = true;
+          return out;
+        } catch (e) {
+          return {};
+        }
+      }
+      function savePackChecked() {
+        try {
+          window.localStorage.setItem(PACK_STORAGE_KEY, JSON.stringify(packChecked));
+        } catch (e) {
+          /* storage unavailable: packing checks stay for this visit only */
+        }
+      }
+      var packChecked = loadPackChecked(); /* persisted per visitor in their own browser */
+
+      /* "דברים נוספים לארוז" — free-text rows each visitor fills in for
+         themselves. The texts are persisted per visitor in their own browser,
+         exactly like the packing checkmarks; there are always at least 8 rows,
+         and the "הוסף שורה" button appends more. */
+      var PACK_CUSTOM_KEY = "cruise-packing-custom-v1";
+      var CUSTOM_MIN_ROWS = 8;
+      function loadCustomItems() {
+        var arr = [];
+        try {
+          var raw = window.localStorage.getItem(PACK_CUSTOM_KEY);
+          if (raw) {
+            var parsed = JSON.parse(raw);
+            if (Array.isArray(parsed)) {
+              arr = parsed.map(function (v) { return typeof v === "string" ? v : ""; });
+            }
+          }
+        } catch (e) {
+          arr = [];
+        }
+        while (arr.length < CUSTOM_MIN_ROWS) arr.push("");
+        return arr;
+      }
+      function saveCustomItems() {
+        try {
+          window.localStorage.setItem(PACK_CUSTOM_KEY, JSON.stringify(customItems));
+        } catch (e) {
+          /* storage unavailable: custom rows stay for this visit only */
+        }
+      }
+      var customItems = loadCustomItems();
+      function packDoneCount() {
+        var n = 0;
+        for (var k in packChecked) if (packChecked[k]) n++;
+        return n;
+      }
+      var activeTab = 0;
+      var confirmReset = false;
+      var resetTimer = null;
+
+      function esc(s) {
+        return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      }
+      function escAttr(s) { return esc(s).replace(/"/g, "&quot;"); }
+      function renderText(s) {
+        /* The ✓ (e.g. in "יום ההפלגה" item 1) is shown in green, as in the guide. */
+        return esc(s).split("✓").join('<span class="green-check">✓</span>');
+      }
+      function keyOf(t, i) { return t + ":" + i; }
+      function tabDone(t) {
+        var n = 0;
+        for (var i = 0; i < TABS[t].items.length; i++) if (checked[keyOf(t, i)]) n++;
+        return n;
+      }
+      function totalDone() {
+        var n = 0;
+        for (var k in checked) if (checked[k]) n++;
+        return n;
+      }
+
+      var tabsEl = document.getElementById("tabs");
+      var sectionEl = document.getElementById("activeSection");
+
+      function renderTabs() {
+        tabsEl.innerHTML = "";
+        TABS.forEach(function (tab, i) {
+          var btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "tab-btn" + (i === activeTab ? " active" : "");
+          btn.setAttribute("aria-pressed", i === activeTab ? "true" : "false");
+          btn.innerHTML =
+            '<span class="tab-head">' + ICONS[tab.icon] +
+            '<span class="tab-title">' + esc(tab.title) + "</span></span>" +
+            '<span class="tab-count">' + (tab.packing ? packDoneCount() + "/" + packTotal() + " בוצעו" : tab.shopping ? "לחצו לפתיחת הרשימה" : tabDone(i) + "/" + tab.items.length + " בוצעו") + "</span>";
+          btn.addEventListener("click", function () {
+            activeTab = i;
+            renderTabs();
+            renderSection();
+          });
+          tabsEl.appendChild(btn);
+        });
+      }
+
+      function renderPackPrint() {
+        var el = document.getElementById("packPrintArea");
+        if (!el) return;
+        var html = "<h1>רשימת אריזה לקרוז</h1>";
+        PACKING_GROUPS.forEach(function (group, g) {
+          html += "<h2>" + esc(group.title) + "</h2><ul>";
+          var rows = group.custom ? customItems : group.items;
+          rows.forEach(function (text, i) {
+            var flat = group.custom ? CUSTOM_START + i : packFlatIndex(g, i);
+            var done = !!packChecked[String(flat)];
+            html += '<li><span class="box">' + (done ? "☑" : "☐") + "</span> " + esc(text) + "</li>";
+          });
+          html += "</ul>";
+          if (group.note) html += '<p class="pack-print-note">' + esc(group.note) + "</p>";
+        });
+        el.innerHTML = html;
+      }
+
+      /* Opens the clean packing print sheet and STAYS there: the actual
+         print dialog is opened by the sheet's own "הדפסה / שמירה כ־PDF"
+         button. (Inside the Muse app preview window.print() is blocked,
+         so auto-printing on the first click would leave the visitor with
+         nothing — the sheet itself is the reliable path, and on the public
+         page its button opens the normal print dialog.) */
+      function openPackPrintView() {
+        renderPackPrint();
+        document.body.classList.add("packing-print-view");
+        var area = document.getElementById("packPrintArea");
+        if (area) area.setAttribute("aria-hidden", "false");
+        window.scrollTo(0, 0);
+        var doBtn = document.getElementById("packPrintDo");
+        if (doBtn) doBtn.focus();
+      }
+      function closePackPrintView() {
+        document.body.classList.remove("packing-print-view");
+        var area = document.getElementById("packPrintArea");
+        if (area) area.setAttribute("aria-hidden", "true");
+      }
+
+      function renderSection() {
+        var tab = TABS[activeTab];
+        if (tab.packing) {
+          var html =
+            '<div class="section-head">' +
+            '<span class="section-icon">' + ICONS[tab.icon] + "</span>" +
+            "<h2>" + esc(tab.title) + "</h2>" +
+            '<span class="section-count">' + packDoneCount() + " מתוך " + packTotal() + " נארזו בלשונית זו</span>" +
+            "</div>" +
+            '<div class="pack-actions card">' +
+            '<button type="button" class="pack-print-btn pack-print-open">' + ICONS.printer + "הדפסה / שמירה כ־PDF של רשימת האריזה</button>" +
+            '<p class="pack-actions-hint">הכפתור פותח גיליון נקי של רשימת האריזה בלבד — עם הסימונים שלכם והפריטים שהוספתם — ומשם מדפיסים או שומרים כ־PDF.</p>' +
+            "</div>";
+          PACKING_GROUPS.forEach(function (group, g) {
+            html += '<h3 class="pack-group-title">' + esc(group.title) + "</h3>" +
+              '<ul class="guide-list">';
+            var rows = group.custom ? customItems : group.items;
+            rows.forEach(function (text, i) {
+              var flat = group.custom ? CUSTOM_START + i : packFlatIndex(g, i);
+              var isChecked = !!packChecked[String(flat)];
+              html +=
+                '<li class="item card' + (isChecked ? " done" : "") + '">' +
+                '<div class="item-row">' +
+                '<label class="item-check" aria-label="סימון הפריט כנארז">' +
+                '<input type="checkbox" class="sea-checkbox pack-checkbox" data-flat="' + flat + '"' +
+                (isChecked ? " checked" : "") + ' aria-label="הפריט נארז">' +
+                "</label>" +
+                (group.custom
+                  ? '<input type="text" class="pack-custom-input" data-custom="' + i + '" value="' + escAttr(text) + '" placeholder="כתבו כאן פריט משלכם…" aria-label="פריט נוסף לאריזה — מילוי עצמי">'
+                  : '<p class="item-text">' + renderText(text) + "</p>") +
+                "</div></li>";
+            });
+            html += "</ul>";
+            if (group.custom) {
+              html += '<div class="pack-add-row"><button type="button" class="pack-add-btn" id="packAddRowBtn">+ הוסף שורה</button></div>';
+            }
+            if (group.note) html += '<p class="pack-note">' + esc(group.note) + "</p>";
+          });
+          html +=
+            '<div class="pack-actions pack-actions-bottom">' +
+            '<button type="button" class="pack-print-btn pack-print-open">' + ICONS.printer + "הדפסה / שמירה כ־PDF של רשימת האריזה</button>" +
+            "</div>";
+          sectionEl.innerHTML = html;
+          var openBtns = sectionEl.querySelectorAll(".pack-print-open");
+          for (var ob = 0; ob < openBtns.length; ob++) {
+            openBtns[ob].addEventListener("click", openPackPrintView);
+          }
+          var pboxes = sectionEl.querySelectorAll(".pack-checkbox");
+          for (var pj = 0; pj < pboxes.length; pj++) {
+            pboxes[pj].addEventListener("change", function () {
+              var f = this.getAttribute("data-flat");
+              if (this.checked) packChecked[f] = true;
+              else delete packChecked[f];
+              savePackChecked();
+              renderTabs();
+              renderSection();
+              renderPackPrint();
+            });
+          }
+          /* Free-text rows in "דברים נוספים לארוז": save as the visitor types,
+             without re-rendering (so the input keeps focus), and refresh the
+             print sheet so it carries the visitor's own text. */
+          var cinputs = sectionEl.querySelectorAll(".pack-custom-input");
+          for (var cj = 0; cj < cinputs.length; cj++) {
+            cinputs[cj].addEventListener("input", function () {
+              var idx = parseInt(this.getAttribute("data-custom"), 10);
+              customItems[idx] = this.value;
+              saveCustomItems();
+              renderPackPrint();
+            });
+          }
+          var addRowBtn = document.getElementById("packAddRowBtn");
+          if (addRowBtn) {
+            addRowBtn.addEventListener("click", function () {
+              customItems.push("");
+              saveCustomItems();
+              renderTabs();
+              renderSection();
+              renderPackPrint();
+              var inputs = sectionEl.querySelectorAll(".pack-custom-input");
+              var last = inputs[inputs.length - 1];
+              if (last) last.focus();
+            });
+          }
+          return;
+        }
+        if (tab.shopping) {
+          sectionEl.innerHTML =
+            '<div class="section-head">' +
+            '<span class="section-icon">' + ICONS[tab.icon] + "</span>" +
+            "<h2>" + esc(tab.title) + "</h2>" +
+            "</div>" +
+            '<div class="shop-panel">' +
+            '<h3 class="shop-title">רשימת קניות מומלצת לקרוז</h3>' +
+            '<p class="shop-intro">הרשימה כוללת מוצרים מומלצים לקרוז, עם קישורים לאמזון לרכישה נוחה.</p>' +
+            "</div>" +
+            '<ul class="shop-list">' +
+            '<li class="card shop-item">' +
+            '<div class="shop-item-info">' +
+            '<p class="shop-item-name">רצועה לכרטיסים לילדים ומבוגרים — חבילה של 5 רצועות עם מחזיק תג אטום למים לכרטיס הספינה, לילדים ולמבוגרים</p>' +
+            '<p class="shop-item-name-en">Avorast Cruise Lanyard for Ship Cards</p>' +
+            "</div>" +
+            '<a class="shop-buy" href="https://a.co/d/0dcY7t6D" target="_blank" rel="noopener">קנייה באמזון</a>' +
+            "</li>" +
+            '<li class="card shop-item">' +
+            '<div class="shop-item-info">' +
+            '<p class="shop-item-name">וו תליה מגנטי — חבילה של 20, עומס עד כ־30 פאונד (כ־13 ק"ג) לוו, לתלייה על קירות מתכת בתא הספינה</p>' +
+            '<p class="shop-item-name-en">DIYMAG Magnetic Hooks, Pack of 20, Holds up to 30 lbs</p>' +
+            "</div>" +
+            '<a class="shop-buy" href="https://a.co/d/06tzeQmj" target="_blank" rel="noopener">קנייה באמזון</a>' +
+            "</li>" +
+            '<li class="card shop-item">' +
+            '<div class="shop-item-info">' +
+            '<p class="shop-item-name">כדורים למחלת ים</p>' +
+            '<p class="shop-item-name-en">Dramamine Motion Sickness Less Drowsy, 16 Tablets (Meclizine 25mg)</p>' +
+            "</div>" +
+            '<a class="shop-buy" href="https://a.co/d/05Xs2Zfd" target="_blank" rel="noopener">קנייה באמזון</a>' +
+            "</li>" +
+            '<li class="card shop-item">' +
+            '<div class="shop-item-info">' +
+            '<p class="shop-item-name">חבל תלייה למרפסת — חבל נמתח עד כ־12 רגל (כ־3.6 מטר) עם 12 אטבים, ווי נירוסטה, לייבוש בגדי ים ומגבות במרפסת התא</p>' +
+            '<p class="shop-item-name-en">HONGYUTAI Retractable Portable Clothesline</p>' +
+            "</div>" +
+            '<a class="shop-buy" href="https://a.co/d/0hdVvnz9" target="_blank" rel="noopener">קנייה באמזון</a>' +
+            "</li>" +
+            '<li class="card shop-item">' +
+            '<div class="shop-item-info">' +
+            '<p class="shop-item-name">מגנט ברווז לדלת התא — קישוט מגנטי רב־פעמי לדלת תא הספינה (ברווז קרוז)</p>' +
+            '<p class="shop-item-name-en">Custom Duck Cruise Door Magnets</p>' +
+            "</div>" +
+            '<a class="shop-buy" href="https://a.co/d/0iLK52kT" target="_blank" rel="noopener">קנייה באמזון</a>' +
+            "</li>" +
+            '<li class="card shop-item">' +
+            '<div class="shop-item-info">' +
+            '<p class="shop-item-name">ערכת שנורקל למבוגרים — מסכת שנורקל עם עדשת זכוכית פנורמית נגד אדים ודליפות, שנורקל יבש, תיק רשת ואטמי אוזניים</p>' +
+            '<p class="shop-item-name-en">PIYAZI Snorkel Set</p>' +
+            "</div>" +
+            '<a class="shop-buy" href="https://a.co/d/0bp1CozL" target="_blank" rel="noopener">קנייה באמזון</a>' +
+            "</li>" +
+            '<li class="card shop-item">' +
+            '<div class="shop-item-info">' +
+            '<p class="shop-item-name">מפצל חשמל לנסיעות — 3 שקעים + 4 חיבורי USB, ללא הגנת נחשול (מותאם לקרוז — מותר בספינה)</p>' +
+            '<p class="shop-item-name-en">NTONPOWER Travel Power Strip</p>' +
+            "</div>" +
+            '<a class="shop-buy" href="https://a.co/d/00xcKpij" target="_blank" rel="noopener">קנייה באמזון</a>' +
+            "</li>" +
+            '<li class="card shop-item">' +
+            '<div class="shop-item-info">' +
+            '<p class="shop-item-name">ערכת מוצרים להפלגה — לא חובה</p>' +
+            '<p class="shop-item-name-en">Cruise Essentials Kit</p>' +
+            "</div>" +
+            '<a class="shop-buy" href="https://a.co/d/0hHqxtUG" target="_blank" rel="noopener">קנייה באמזון</a>' +
+            "</li>" +
+            "</ul>" +
+            '<p class="shop-note">הרשימה מתעדכנת — מוצרים נוספים יתווספו בהמשך.</p>';
+          return;
+        }
+        var html =
+          '<div class="section-head">' +
+          '<span class="section-icon">' + ICONS[tab.icon] + "</span>" +
+          "<h2>" + esc(tab.title) + "</h2>" +
+          '<span class="section-count">' + tabDone(activeTab) + " מתוך " + tab.items.length + " בוצעו בלשונית זו</span>" +
+          "</div>" +
+          '<ul class="guide-list">';
+        tab.items.forEach(function (raw, i) {
+          var item = typeof raw === "string" ? { text: raw } : raw;
+          var isChecked = !!checked[keyOf(activeTab, i)];
+          html +=
+            '<li class="item card' + (item.highlighted ? " highlighted-item" : "") + (isChecked ? " done" : "") + '">' +
+            '<div class="item-row">' +
+            '<label class="item-check" aria-label="סימון הסעיף כבוצע">' +
+            '<input type="checkbox" class="sea-checkbox" data-tab="' + activeTab + '" data-item="' + i + '"' +
+            (isChecked ? " checked" : "") + ' aria-label="הסעיף בוצע">' +
+            "</label>" +
+            "<div>" +
+            (item.highlighted ? '<span class="highlight-badge">★ חשוב במיוחד</span>' : "") +
+            '<p class="item-text">' + renderText(item.text) + "</p>" +
+            "</div>" +
+            "</div></li>";
+        });
+        html += "</ul>";
+        sectionEl.innerHTML = html;
+        var boxes = sectionEl.querySelectorAll(".sea-checkbox");
+        for (var j = 0; j < boxes.length; j++) {
+          boxes[j].addEventListener("change", function () {
+            var t = this.getAttribute("data-tab");
+            var it = this.getAttribute("data-item");
+            if (this.checked) checked[keyOf(t, it)] = true;
+            else delete checked[keyOf(t, it)];
+            saveChecked();
+            renderAll(false);
+          });
+        }
+      }
+
+      function renderProgress() {
+        var done = totalDone();
+        var pct = TOTAL === 0 ? 0 : Math.round((done / TOTAL) * 100);
+        document.getElementById("doneTotal").textContent = done;
+        document.getElementById("totalItems").textContent = TOTAL;
+        document.getElementById("progressFill").style.width = pct + "%";
+        document.getElementById("progressPct").textContent = pct + "% הושלמו";
+        var bar = document.getElementById("progressBar");
+        bar.setAttribute("aria-valuenow", done);
+        bar.setAttribute("aria-valuemax", TOTAL);
+        var btn = document.getElementById("resetBtn");
+        btn.disabled = done === 0 && !confirmReset;
+        btn.textContent = confirmReset ? "בטוח? לחצו שוב לאיפוס" : "איפוס הסימונים";
+      }
+
+      function renderAll() {
+        renderTabs();
+        renderSection();
+        renderProgress();
+      }
+
+      var resetBtn = document.getElementById("resetBtn");
+      resetBtn.addEventListener("click", function () {
+        if (!confirmReset) {
+          confirmReset = true;
+          renderProgress();
+          resetTimer = window.setTimeout(function () {
+            confirmReset = false;
+            renderProgress();
+          }, 4000);
+          return;
+        }
+        window.clearTimeout(resetTimer);
+        confirmReset = false;
+        checked = {};
+        saveChecked();
+        renderAll(true);
+      });
+
+      /* ---------- suggestions line: plain mailto link plus a copy-address button ---------- */
+      var CONTACT_EMAIL = "selahr2012@gmail.com";
+      var copyEmailBtn = document.getElementById("feedbackCopyEmail");
+      var copyEmailStatus = document.getElementById("feedbackCopyStatus");
+
+      copyEmailBtn.addEventListener("click", function () {
+        function copied() {
+          copyEmailStatus.textContent = "הכתובת הועתקה!";
+          copyEmailStatus.hidden = false;
+        }
+        function copyFailed() {
+          copyEmailStatus.textContent = "ההעתקה לא הצליחה — אפשר להעתיק את הכתובת ידנית: " + CONTACT_EMAIL;
+          copyEmailStatus.hidden = false;
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(CONTACT_EMAIL).then(copied, function () {
+            if (!legacyCopyText(CONTACT_EMAIL)) copyFailed(); else copied();
+          });
+        } else if (!legacyCopyText(CONTACT_EMAIL)) {
+          copyFailed();
+        } else {
+          copied();
+        }
+      });
+      function legacyCopyText(text) {
+        try {
+          var ta = document.createElement("textarea");
+          ta.value = text;
+          ta.setAttribute("readonly", "");
+          ta.style.position = "absolute";
+          ta.style.left = "-9999px";
+          document.body.appendChild(ta);
+          ta.select();
+          var ok = document.execCommand("copy");
+          document.body.removeChild(ta);
+          return !!ok;
+        } catch (e) {
+          return false;
+        }
+      }
+
+      document.getElementById("packPrintBack").addEventListener("click", function () {
+        closePackPrintView();
+        window.scrollTo(0, 0);
+      });
+
+      /* The print sheet's own print button — this is the button that opens
+         the browser print dialog (from which the visitor can also choose
+         "save as PDF"). */
+      document.getElementById("packPrintDo").addEventListener("click", function () {
+        window.print();
+      });
+
+      /* After the browser print dialog closes (printed, saved as PDF, or
+         cancelled), leave the clean print view and return to the packing list. */
+      window.addEventListener("afterprint", function () {
+        closePackPrintView();
+      });
+
+      renderAll(true);
+      renderPackPrint();
+    </script>
+  </body>
+</html>
